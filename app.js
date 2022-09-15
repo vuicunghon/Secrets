@@ -147,9 +147,13 @@ app.post('/login', (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            passport.authenticate('local')(req, res, function() {
-                res.redirect("/secrets");
-            });
+            // passport.authenticate('local')(req, res, function() {
+            //     res.redirect("/secrets");
+            // });
+            passport.authenticate('local', { failureRedirect: '/login' }),
+            function(req, res) {
+                res.redirect('/secrets');
+            }
         }
     });
 });
